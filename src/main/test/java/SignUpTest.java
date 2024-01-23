@@ -7,6 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -25,12 +26,14 @@ public class SignUpTest {
 
         String name = "Test1";
         String lastName = "Tester1";
+        int random = (int) (Math.random() * 1000);
+        String email = "test" + random + "@gmail.com";
 
         driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
         driver.findElement(By.name("firstname")).sendKeys(name);
         driver.findElement(By.name("lastname")).sendKeys(lastName);
         driver.findElement(By.name("phone")).sendKeys("654456654");
-        driver.findElement(By.name("email")).sendKeys("test2@gmail.com");
+        driver.findElement(By.name("email")).sendKeys(email);
         driver.findElement(By.name("password")).sendKeys("qwerty");
         driver.findElement(By.name("confirmpassword")).sendKeys("qwerty");
         driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
