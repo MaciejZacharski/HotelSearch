@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 public class EmptyHotelSearch {
 
     @Test
-    public void searchHotel() throws InterruptedException {
+    public void searchEmptyHotel() {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -25,6 +25,7 @@ public class EmptyHotelSearch {
         driver.findElement(By.xpath("//button[text()=' Search']")).click();
        WebElement noResult = driver.findElement(By.xpath("//h2[text()='No Results Found']"));
 
+        Assert.assertTrue(noResult.isDisplayed());
         Assert.assertEquals(noResult.getText(), "No Results Found");
 
     }

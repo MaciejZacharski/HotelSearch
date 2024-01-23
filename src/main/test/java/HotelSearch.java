@@ -15,7 +15,7 @@ public class HotelSearch {
 
 
     @Test
-    public void searchHotel() throws InterruptedException {
+    public void searchHotel() {
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -34,12 +34,12 @@ public class HotelSearch {
         driver.findElement(By.xpath("//button[text()=' Search']")).click();
     List<String> hotelNames =    driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b")).stream()
                 .map(el ->el.getAttribute("textContent"))
-                .collect(Collectors.toList());
+                .toList();
 
-        Assert.assertEquals("Jumeirah Beach Hotel", hotelNames.get(0));
-        Assert.assertEquals("Oasis Beach Tower", hotelNames.get(1));
-        Assert.assertEquals("Rose Rayhaan Rotana", hotelNames.get(2));
-        Assert.assertEquals("Hyatt Regency Perth", hotelNames.get(3));
+        Assert.assertEquals(hotelNames.get(0),"Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
+        Assert.assertEquals(hotelNames.get(2),"Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3),"Hyatt Regency Perth");
 
       /*  driver.findElements(By.xpath("//td[@class='day' and text()='25']")).stream()
                 .filter(WebElement::isDisplayed)
