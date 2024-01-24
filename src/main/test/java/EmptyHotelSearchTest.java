@@ -1,22 +1,13 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
-
-public class EmptyHotelSearch {
+public class EmptyHotelSearchTest extends BaseTest {
 
     @Test
     public void searchEmptyHotel() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+
 
         driver.findElement(By.name("checkin")).sendKeys("21/02/2024");
         driver.findElement(By.name("checkout")).sendKeys("25/02/2024");
@@ -27,6 +18,7 @@ public class EmptyHotelSearch {
 
         Assert.assertTrue(noResult.isDisplayed());
         Assert.assertEquals(noResult.getText(), "No Results Found");
+
 
     }
 }

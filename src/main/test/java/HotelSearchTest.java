@@ -1,26 +1,15 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
-import io.github.bonigarcia.wdm.managers.ChromeDriverManager;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-public class HotelSearch {
+public class HotelSearchTest extends BaseTest {
 
 
     @Test
     public void searchHotel() {
-        WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.manage().window().maximize();
-        driver.get("http://www.kurs-selenium.pl/demo/");
+
 
         driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
         driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
@@ -40,6 +29,8 @@ public class HotelSearch {
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
         Assert.assertEquals(hotelNames.get(2),"Rose Rayhaan Rotana");
         Assert.assertEquals(hotelNames.get(3),"Hyatt Regency Perth");
+
+
 
       /*  driver.findElements(By.xpath("//td[@class='day' and text()='25']")).stream()
                 .filter(WebElement::isDisplayed)
