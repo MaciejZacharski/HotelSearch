@@ -18,7 +18,7 @@ public class LoggedUserPage {
 
     public String getHeadingText() {
 
-      return userHeading.getText();
+        return userHeading.getText();
     }
 
 

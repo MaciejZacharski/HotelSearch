@@ -20,6 +20,7 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.get("http://www.kurs-selenium.pl/demo/");
     }
+
     @AfterMethod
     public void afterMethod() {
         driver.quit();

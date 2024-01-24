@@ -21,13 +21,13 @@ public class ResultsPage {
     }
 
     public List<String> getHotelNames() {
-      return   hotelNames.stream()
-              .map(el ->el.getAttribute("textContent"))
-              .toList();
+        return hotelNames.stream()
+                .map(el -> el.getAttribute("textContent"))
+                .toList();
 
     }
 
     public String getEmptyResult() {
-       return noResultsFound.getText();
+        return noResultsFound.getText();
     }
 }

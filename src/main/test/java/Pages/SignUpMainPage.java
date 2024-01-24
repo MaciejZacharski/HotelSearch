@@ -9,6 +9,8 @@ import java.util.List;
 
 public class SignUpMainPage {
 
+    private WebDriver driver;
+
     @FindBy(id = "li_myaccount")
     private List<WebElement> myAccountBtn;
 
@@ -17,11 +19,12 @@ public class SignUpMainPage {
 
     public SignUpMainPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
-
+        this.driver = driver;
     }
 
-    public void openSignUpForm() {
+    public SignUpPage openSignUpForm() {
         myAccountBtn.stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
         signUpBtn.get(1).click();
+        return new SignUpPage(driver);
     }
 }

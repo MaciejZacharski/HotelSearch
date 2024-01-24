@@ -15,31 +15,29 @@ public class HotelSearchTest extends BaseTest {
     public void searchHotel() {
         HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
 
-        hotelSearchPage.setCityName("Dubai");
-        hotelSearchPage.setDates("22/02/2024", "29/02/2024");
-        hotelSearchPage.SetTravellers(1,2);
-        hotelSearchPage.clickOnSearchButton();
+        List<String> hotelNames = hotelSearchPage.setCityName("Dubai")
+                .setDates("22/02/2024", "29/02/2024")
+                .SetTravellers(1, 2)
+                .clickOnSearchButton().getHotelNames();
 
-        ResultsPage resultsPage = new ResultsPage(driver);
-        List<String> hotelNames = resultsPage.getHotelNames();
-
-
-
-        Assert.assertEquals(hotelNames.get(0),"Jumeirah Beach Hotel");
+        Assert.assertEquals(hotelNames.get(0), "Jumeirah Beach Hotel");
         Assert.assertEquals(hotelNames.get(1), "Oasis Beach Tower");
-        Assert.assertEquals(hotelNames.get(2),"Rose Rayhaan Rotana");
-        Assert.assertEquals(hotelNames.get(3),"Hyatt Regency Perth");
+        Assert.assertEquals(hotelNames.get(2), "Rose Rayhaan Rotana");
+        Assert.assertEquals(hotelNames.get(3), "Hyatt Regency Perth");
 
+    }
 
+    @Test
+    public void searchEmptyHotel() {
 
-      /*  driver.findElements(By.xpath("//td[@class='day' and text()='25']")).stream()
-                .filter(WebElement::isDisplayed)
-                .findFirst().ifPresent(WebElement::click);*/
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
 
+        ResultsPage resultsPage = hotelSearchPage.setDates("22/02/2024", "29/02/2024")
+                .SetTravellers(0, 1)
+                .clickOnSearchButton();
 
-
-
-
+        Assert.assertTrue(resultsPage.noResultsFound.isDisplayed());
+        Assert.assertEquals(resultsPage.getEmptyResult(), "No Results Found");
 
 
     }
