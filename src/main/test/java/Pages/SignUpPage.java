@@ -1,5 +1,6 @@
 package Pages;
 
+import Model.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -68,6 +69,26 @@ public class SignUpPage {
         return  errors.stream()
                 .map(WebElement::getText)
                 .toList();
+    }
+    public void fillSignUpForm(String firstName, String lastName, String phone, String email, String password) {
+       firstNameInput.sendKeys(firstName);
+       lastNameInput.sendKeys(lastName);
+       phoneNumberInput.sendKeys(phone);
+       eMailInput.sendKeys(email);
+       passwordInput.sendKeys(password);
+       confirmPasswordInput.sendKeys(password);
+        clickSignUp();
+    }
+
+    public void fillSignUpForm(User user) {
+
+        firstNameInput.sendKeys(user.getFirstName());
+        lastNameInput.sendKeys(user.getLastName());
+        phoneNumberInput.sendKeys(user.getPhone());
+        eMailInput.sendKeys(user.getEmail());
+        passwordInput.sendKeys(user.getPassword());
+        confirmPasswordInput.sendKeys(user.getPassword());
+        clickSignUp();
     }
 
 

@@ -1,5 +1,6 @@
 package Pages.Tests;
 
+import Model.User;
 import Pages.LoggedUserPage;
 import Pages.SignUpMainPage;
 import Pages.SignUpPage;
@@ -41,6 +42,35 @@ public class SignUpTest extends BaseTest {
 
       Assert.assertTrue(loggedUserPage.getHeadingText().contains("Maciej"));
       Assert.assertTrue(loggedUserPage.getHeadingText().contains("Test"));
+
+
+    }
+    @Test
+    public void signUp2() {
+
+        SignUpMainPage signUp = new SignUpMainPage(driver);
+        signUp.openSignUpForm();
+
+        int random = (int) (Math.random() * 1000);
+        String email = "test" + random + "@gmail.com";
+
+        SignUpPage signUpPage = new SignUpPage(driver);
+     //  signUpPage.fillSignUpForm("Maciej", "Test", "654321123", email, "test123");
+
+        User user = new User();
+        user.setFirstName("Maciej");
+        user.setLastName("Test");
+        user.setPhone("123443211");
+        user.setEmail(email);
+        user.setPassword("qwerty");
+        signUpPage.fillSignUpForm(user);
+
+
+        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
+
+
+        Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getFirstName()));
+        Assert.assertTrue(loggedUserPage.getHeadingText().contains(user.getLastName()));
 
 
     }
