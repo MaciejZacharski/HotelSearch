@@ -6,6 +6,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.util.List;
+
 public class SignUpPage {
 
 
@@ -24,6 +26,9 @@ public class SignUpPage {
     private WebElement confirmPasswordInput;
     @FindBy(xpath = "//button[text()=' Sign Up']")
     private  WebElement signUpBtn;
+
+    @FindBy(xpath = "//div[contains(@class, 'alert')]//p")
+    private List<WebElement> errors;
 
     public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
@@ -58,6 +63,13 @@ public class SignUpPage {
        signUpBtn.click();
 
     }
+    public List<String> getErrors() {
+
+        return  errors.stream()
+                .map(WebElement::getText)
+                .toList();
+    }
+
 
 
 

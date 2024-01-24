@@ -1,5 +1,6 @@
 package Pages.Tests;
 
+import Pages.LoggedUserPage;
 import Pages.SignUpMainPage;
 import Pages.SignUpPage;
 import Pages.Tests.BaseTest;
@@ -35,23 +36,25 @@ public class SignUpTest extends BaseTest {
         signUpPage.clickSignUp();
 
 
-      WebElement heading = driver.findElement(By.xpath("//h3[@class='RTL']"));
+        LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
 
-     // Assert.assertTrue(heading.getText().contains(lastName));
-    //  Assert.assertTrue(heading.getText().contains(name));
+
+      Assert.assertTrue(loggedUserPage.getHeadingText().contains("Maciej"));
+      Assert.assertTrue(loggedUserPage.getHeadingText().contains("Test"));
 
 
     }
     @Test
     public void EmptySignUp() {
 
-        driver.findElements(By.id("li_myaccount")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
-        driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
-        driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
+        SignUpMainPage signUp = new SignUpMainPage(driver);
+        signUp.openSignUpForm();
 
-        List<String> errorMessages =    driver.findElements(By.xpath("//div[contains(@class, 'alert')]//p")).stream()
-                .map(el ->el.getAttribute("textContent"))
-                .toList();
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.clickSignUp();
+
+
+        List<String> errorMessages =    signUpPage.getErrors();
 
         SoftAssert softAssert = new SoftAssert();
         softAssert.assertEquals(errorMessages.size(), 5);
@@ -69,30 +72,25 @@ public class SignUpTest extends BaseTest {
     public void wrongEmailFormat() {
 
 
-        driver.findElements(By.id("li_myaccount")).stream().filter(WebElement::isDisplayed).findFirst().ifPresent(WebElement::click);
 
-        String name = "Test1";
-        String lastName = "Tester1";
-        int random = (int) (Math.random() * 1000);
-        String email = "test" + random + "gmail.com";
+        String email = "test";
 
-        driver.findElements(By.xpath("//a[text()='  Sign Up']")).get(1).click();
-        driver.findElement(By.name("firstname")).sendKeys(name);
-        driver.findElement(By.name("lastname")).sendKeys(lastName);
-        driver.findElement(By.name("phone")).sendKeys("654456654");
-        driver.findElement(By.name("email")).sendKeys(email);
-        driver.findElement(By.name("password")).sendKeys("qwerty");
-        driver.findElement(By.name("confirmpassword")).sendKeys("qwerty");
-        driver.findElement(By.xpath("//button[text()=' Sign Up']")).click();
+        SignUpMainPage signUp = new SignUpMainPage(driver);
+        signUp.openSignUpForm();
 
-       String emailFormatMessage = driver.findElement(By.xpath("//div[contains(@class, 'alert')]//p")).getText();
-
-       Assert.assertEquals(emailFormatMessage, "The Email field must contain a valid email address.");
+        SignUpPage signUpPage = new SignUpPage(driver);
+        signUpPage.setFirstName("Maciej");
+        signUpPage.setLastName("Test");
+        signUpPage.setPhoneNumber("12344321");
+        signUpPage.setMailInput(email);
+        signUpPage.setPassword("qwerty");
+        signUpPage.setConfirmPassword("qwerty");
+        signUpPage.clickSignUp();
 
 
 
 
-
+       Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
 
     }
 
