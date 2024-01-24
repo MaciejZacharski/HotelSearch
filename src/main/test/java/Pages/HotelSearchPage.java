@@ -16,8 +16,7 @@ public class HotelSearchPage {
             private WebElement searchHotelSpan;
     @FindBy(xpath = "//div[@id='select2-drop']//input")
             private WebElement searchHotelInput;
-    @FindBy (xpath = "//span[@class='select2-match' and text()='Dubai']")
-            private WebElement hotelMatch;
+
     @FindBy(name = "checkin")
             private WebElement checkInInput;
     @FindBy(name = "checkout")
@@ -32,14 +31,20 @@ public class HotelSearchPage {
     @FindBy(xpath = "//button[text()=' Search']")
             private WebElement searchButton;
 
+    private WebDriver driver;
+
     public HotelSearchPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver = driver;
     }
 
     public void setCityName(String cityName) {
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
-        hotelMatch.click();
+       String xPath =  String.format("//span[@class='select2-match' and text()='%s']", cityName);
+        driver.findElement(By.xpath(xPath)).click();
+
+
 
     }
 
