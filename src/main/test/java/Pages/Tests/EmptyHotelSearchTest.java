@@ -1,26 +1,33 @@
 package Pages.Tests;
 
+import Pages.HotelSearchPage;
+import Pages.ResultsPage;
 import Pages.Tests.BaseTest;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class EmptyHotelSearchTest extends BaseTest {
 
     @Test
     public void searchEmptyHotel() {
 
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
 
-        driver.findElement(By.name("checkin")).sendKeys("21/02/2024");
-        driver.findElement(By.name("checkout")).sendKeys("25/02/2024");
-        driver.findElement(By.id("travellersInput")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-        driver.findElement(By.xpath("//button[text()=' Search']")).click();
-       WebElement noResult = driver.findElement(By.xpath("//h2[text()='No Results Found']"));
 
-        Assert.assertTrue(noResult.isDisplayed());
-        Assert.assertEquals(noResult.getText(), "No Results Found");
+        hotelSearchPage.setDates("22/02/2024", "29/02/2024");
+        hotelSearchPage.SetTravellers(0,1);
+        hotelSearchPage.clickOnSearchButton();
+
+        ResultsPage resultsPage = new ResultsPage(driver);
+        String noResultMessage = resultsPage.getEmptyResult();
+
+        Assert.assertTrue(resultsPage.noResultsFound.isDisplayed());
+        Assert.assertEquals(noResultMessage, "No Results Found");
 
 
     }
