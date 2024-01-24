@@ -1,3 +1,6 @@
+package Pages.Tests;
+
+import Pages.Tests.BaseTest;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;

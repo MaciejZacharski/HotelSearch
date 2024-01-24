@@ -1,3 +1,6 @@
+package Pages.Tests;
+
+import Pages.HotelSearchPage;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -9,18 +12,13 @@ public class HotelSearchTest extends BaseTest {
 
     @Test
     public void searchHotel() {
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+        hotelSearchPage.setCityName("Dubai");
+        hotelSearchPage.setDates("22/02/2024", "29/02/2024");
+        hotelSearchPage.SetTravellers();
+        hotelSearchPage.clickOnSearchButton();
 
 
-        driver.findElement(By.xpath("//span[text()='Search by Hotel or City Name']")).click();
-        driver.findElement(By.xpath("//div[@id='select2-drop']//input")).sendKeys("Dubai");
-
-        driver.findElement(By.xpath("//span[@class='select2-match' and text()='Dubai']")).click();
-        driver.findElement(By.name("checkin")).sendKeys("21/02/2024");
-        driver.findElement(By.name("checkout")).sendKeys("25/02/2024");
-        driver.findElement(By.id("travellersInput")).click();
-        driver.findElement(By.id("adultPlusBtn")).click();
-        driver.findElement(By.id("childPlusBtn")).click();
-        driver.findElement(By.xpath("//button[text()=' Search']")).click();
     List<String> hotelNames =    driver.findElements(By.xpath("//h4[contains(@class,'list_title')]//b")).stream()
                 .map(el ->el.getAttribute("textContent"))
                 .toList();
