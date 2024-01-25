@@ -2,10 +2,13 @@ package Pages.Tests;
 
 import Pages.HotelSearchPage;
 import Pages.ResultsPage;
+import Util.ExcelReader;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.util.List;
 
 public class HotelSearchTest extends BaseTest {
@@ -52,6 +55,28 @@ public class HotelSearchTest extends BaseTest {
         Assert.assertEquals(noResultMessage, "No Results Found");
 
 
+    }
+
+    @Test(dataProvider = "data")
+    public void searchHotelTestDataProvider(String city, String hotelName) {
+        HotelSearchPage hotelSearchPage = new HotelSearchPage(driver);
+
+        hotelSearchPage.setCityName(city);
+        hotelSearchPage.setDates("22/02/2024", "29/02/2024");
+        hotelSearchPage.SetTravellers(1, 2);
+        hotelSearchPage.clickOnSearchButton();
+
+        ResultsPage resultsPage = new ResultsPage(driver);
+        List<String> hotelNames = resultsPage.getHotelNames();
+
+
+        Assert.assertEquals(hotelNames.get(0), hotelName);
+
+    }
+
+    @DataProvider
+    public Object[][] data() throws IOException {
+        return ExcelReader.readExcel("testdata.xlsx");
     }
 
 

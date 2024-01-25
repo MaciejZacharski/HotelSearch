@@ -14,32 +14,36 @@ import java.io.IOException;
 public class ExcelReader {
 
 
-    public static void readExcel(String fileName) throws IOException {
+    public static Object[][] readExcel(String fileName) throws IOException {
 
         File file = new File("C:\\Users\\PC\\Desktop\\Selenium kurs\\AplikacjaHotelowaTesty\\AplikacjaHotelowaTesty\\src\\main\\test\\resources\\" + fileName);
         FileInputStream inputStream = new FileInputStream(file);
         Workbook workbook = null;
 
         String fileExt = fileName.substring(fileName.indexOf("."));
-        if(fileExt.equals(".xlsx")) {
+        if (fileExt.equals(".xlsx")) {
             workbook = new XSSFWorkbook(inputStream);
         } else if (fileExt.equals(".xls")) {
             workbook = new HSSFWorkbook(inputStream);
         }
 
-       Sheet sheet = workbook.getSheetAt(0);
-        int rowCount =sheet.getLastRowNum();
+        Sheet sheet = workbook.getSheetAt(0);
+        int rowCount = sheet.getLastRowNum();
+        int columnCount = sheet.getRow(0).getLastCellNum();
+        Object[][] data = new Object[rowCount][columnCount];
 
-        for(int i=1; i <= rowCount; i++) {
+
+        for (int i = 1; i <= rowCount; i++) {
             Row row = sheet.getRow(i);
 
-            System.out.println(row.getCell(0).getStringCellValue());
-            System.out.println(row.getCell(1).getStringCellValue());
+            for (int j = 0; j < columnCount; j++) {
+                data[i - 1][j] = row.getCell(j).getStringCellValue();
+            }
 
 
         }
 
-
+        return data;
 
     }
 
