@@ -5,6 +5,7 @@ import Pages.LoggedUserPage;
 import Pages.SignUpMainPage;
 import Pages.SignUpPage;
 import Pages.Tests.BaseTest;
+import Util.SeleniumHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
@@ -53,7 +54,7 @@ public class SignUpTest extends BaseTest {
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.clickSignUp();
 
-
+        
         List<String> errorMessages = signUpPage.getErrors();
 
         SoftAssert softAssert = new SoftAssert();

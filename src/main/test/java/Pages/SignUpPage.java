@@ -1,6 +1,7 @@
 package Pages;
 
 import Model.User;
+import Util.SeleniumHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -30,8 +31,11 @@ public class SignUpPage {
     @FindBy(xpath = "//div[contains(@class, 'alert')]//p")
     private List<WebElement> errors;
 
+    private WebDriver driver;
+
     public SignUpPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
+        this.driver = driver;
 
     }
 
@@ -71,7 +75,7 @@ public class SignUpPage {
     }
 
     public List<String> getErrors() {
-
+        SeleniumHelper.wairForNotEmptyList(driver, By.xpath("//div[contains(@class, 'alert')]//p"));
         return errors.stream()
                 .map(WebElement::getText)
                 .toList();
