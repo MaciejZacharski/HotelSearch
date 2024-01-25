@@ -48,7 +48,7 @@ public class BaseTest {
     public void afterSuite() {
         htmlReporter.flush();
         extentReports.flush();
-        
+
     }
 
 }
