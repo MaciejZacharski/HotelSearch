@@ -12,7 +12,6 @@ import java.util.List;
 public class SignUpPage {
 
 
-
     @FindBy(name = "firstname")
     private WebElement firstNameInput;
     @FindBy(name = "lastname")
@@ -26,7 +25,7 @@ public class SignUpPage {
     @FindBy(name = "confirmpassword")
     private WebElement confirmPasswordInput;
     @FindBy(xpath = "//button[text()=' Sign Up']")
-    private  WebElement signUpBtn;
+    private WebElement signUpBtn;
 
     @FindBy(xpath = "//div[contains(@class, 'alert')]//p")
     private List<WebElement> errors;
@@ -40,37 +39,44 @@ public class SignUpPage {
         firstNameInput.sendKeys(firstName);
 
     }
+
     public void setLastName(String lastName) {
         lastNameInput.sendKeys(lastName);
 
     }
-    public void setPhoneNumber( String phoneNumber) {
+
+    public void setPhoneNumber(String phoneNumber) {
         phoneNumberInput.sendKeys(phoneNumber);
 
     }
-        public void setMailInput( String eMail) {
+
+    public void setMailInput(String eMail) {
         eMailInput.sendKeys(eMail);
 
     }
+
     public void setPassword(String password) {
         passwordInput.sendKeys(password);
 
     }
+
     public void setConfirmPassword(String confirmPassword) {
         confirmPasswordInput.sendKeys(confirmPassword);
 
     }
+
     public void clickSignUp() {
-       signUpBtn.click();
+        signUpBtn.click();
 
     }
+
     public List<String> getErrors() {
 
-        return  errors.stream()
+        return errors.stream()
                 .map(WebElement::getText)
                 .toList();
     }
-    public void fillSignUpForm(String firstName, String lastName, String phone, String email, String password) {
+  /*  public void fillSignUpForm(String firstName, String lastName, String phone, String email, String password) {
        firstNameInput.sendKeys(firstName);
        lastNameInput.sendKeys(lastName);
        phoneNumberInput.sendKeys(phone);
@@ -90,7 +96,7 @@ public class SignUpPage {
         confirmPasswordInput.sendKeys(user.getPassword());
         clickSignUp();
     }
-
+*/
 
 
 
@@ -98,8 +104,6 @@ public class SignUpPage {
     String lastName = "Tester1";
     int random = (int) (Math.random() * 1000);
     String email = "test" + random + "@gmail.com";*/
-
-
 
 
 //    WebElement heading = driver.findElement(By.xpath("//h3[@class='RTL']"));

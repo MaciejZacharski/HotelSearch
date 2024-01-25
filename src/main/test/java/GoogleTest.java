@@ -1,9 +1,7 @@
 import Pages.Tests.BaseTest;
 import org.testng.annotations.Test;
 
-public class GoogleTest  extends BaseTest {
-
-
+public class GoogleTest extends BaseTest {
 
 
     @Test
@@ -21,6 +19,7 @@ public class GoogleTest  extends BaseTest {
         PageObjectGoogleHomePage googleHomePage = new PageObjectGoogleHomePage();
         googleHomePage.searchInGoogle("Legia");
     }
+
     @Test
     public void googleSearchTest3() {
         driver.get("https://www.google.com/");

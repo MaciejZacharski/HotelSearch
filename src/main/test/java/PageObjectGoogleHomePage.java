@@ -9,9 +9,7 @@ public class PageObjectGoogleHomePage {
     private WebElement searchButton;
 
 
-
     public void searchInGoogle(String phrase) {
-
 
 
         searchInput.sendKeys("phrase");
