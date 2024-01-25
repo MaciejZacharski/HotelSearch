@@ -54,15 +54,18 @@ public class HotelSearchPage {
     }
 
     public void setDates(String checkin, String checkout) {
+        logger.info("Setting dates checkin " + checkin + " checkout " +checkout);
         checkInInput.sendKeys(checkin);
         checkoutInput.sendKeys(checkout);
+        logger.info("Setting dates done");
     }
 
     public void SetTravellers(int adultsToAdd, int childToAdd) {
-
+        logger.info("Setting travellers " + adultsToAdd + " adults " + childToAdd + " children");
         travellersInput.click();
         addTraveler(adultPlusBtn, adultsToAdd);
         addTraveler(childPlusBtn, childToAdd);
+        logger.info("Setting travellers done");
 
     }
 
