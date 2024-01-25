@@ -54,7 +54,7 @@ public class SignUpTest extends BaseTest {
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.clickSignUp();
 
-        
+
         List<String> errorMessages = signUpPage.getErrors();
 
         SoftAssert softAssert = new SoftAssert();
