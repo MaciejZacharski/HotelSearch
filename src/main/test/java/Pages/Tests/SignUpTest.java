@@ -6,22 +6,27 @@ import Pages.SignUpMainPage;
 import Pages.SignUpPage;
 import Pages.Tests.BaseTest;
 import Util.SeleniumHelper;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.io.IOException;
 import java.util.List;
 
 public class SignUpTest extends BaseTest {
 
 
     @Test
-    public void signUp() {
+    public void signUp() throws IOException {
+        ExtentTest test = extentReports.createTest("SignUpTest");
 
         SignUpMainPage signUp = new SignUpMainPage(driver);
         signUp.openSignUpForm();
+        test.log(Status.PASS, "Sign up form Page Open", SeleniumHelper.getScreenshot(driver));
 
         int random = (int) (Math.random() * 1000);
         String email = "test" + random + "@gmail.com";
@@ -33,27 +38,31 @@ public class SignUpTest extends BaseTest {
         signUpPage.setMailInput(email);
         signUpPage.setPassword("qwerty");
         signUpPage.setConfirmPassword("qwerty");
+        test.log(Status.PASS, "Sign up form filled", SeleniumHelper.getScreenshot(driver));
         signUpPage.clickSignUp();
-
+        test.log(Status.PASS, "Sign up form done and sent", SeleniumHelper.getScreenshot(driver));
 
         LoggedUserPage loggedUserPage = new LoggedUserPage(driver);
 
 
         Assert.assertTrue(loggedUserPage.getHeadingText().contains("Maciej"));
         Assert.assertTrue(loggedUserPage.getHeadingText().contains("Test"));
-
+        test.log(Status.PASS, "Assertion passed", SeleniumHelper.getScreenshot(driver));
 
     }
 
     @Test
-    public void EmptySignUp() {
+    public void EmptySignUp() throws IOException {
+        ExtentTest test = extentReports.createTest("EmptySignUpTest");
 
         SignUpMainPage signUp = new SignUpMainPage(driver);
         signUp.openSignUpForm();
+        test.log(Status.PASS, "Sign up form Page Open", SeleniumHelper.getScreenshot(driver));
 
         SignUpPage signUpPage = new SignUpPage(driver);
-        signUpPage.clickSignUp();
 
+        signUpPage.clickSignUp();
+        test.log(Status.PASS, "Empty Sign up form clicked", SeleniumHelper.getScreenshot(driver));
 
         List<String> errorMessages = signUpPage.getErrors();
 
@@ -67,17 +76,18 @@ public class SignUpTest extends BaseTest {
 
 
         softAssert.assertAll();
-
+        test.log(Status.PASS, "Assertion passed", SeleniumHelper.getScreenshot(driver));
     }
 
     @Test
-    public void wrongEmailFormat() {
-
+    public void wrongEmailFormat() throws IOException {
+        ExtentTest test = extentReports.createTest("WrongEmailFormatTest");
 
         String email = "test";
 
         SignUpMainPage signUp = new SignUpMainPage(driver);
         signUp.openSignUpForm();
+        test.log(Status.PASS, "Sign up form Page Open", SeleniumHelper.getScreenshot(driver));
 
         SignUpPage signUpPage = new SignUpPage(driver);
         signUpPage.setFirstName("Maciej");
@@ -86,11 +96,12 @@ public class SignUpTest extends BaseTest {
         signUpPage.setMailInput(email);
         signUpPage.setPassword("qwerty");
         signUpPage.setConfirmPassword("qwerty");
+        test.log(Status.PASS, "Sign up form filled", SeleniumHelper.getScreenshot(driver));
         signUpPage.clickSignUp();
-
+        test.log(Status.PASS, "Sign up form clicked but not sent", SeleniumHelper.getScreenshot(driver));
 
         Assert.assertTrue(signUpPage.getErrors().contains("The Email field must contain a valid email address."));
-
+        test.log(Status.PASS, "Assertion passed", SeleniumHelper.getScreenshot(driver));
     }
 
 
