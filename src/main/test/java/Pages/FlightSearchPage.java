@@ -127,11 +127,9 @@ public class FlightSearchPage {
 
         return new FlightSearchPage(driver);
     }
-    
     public FlightSearchPage setNumberOfAdultPassengers(int numberOfAdultPassengers) {
         Select selectAdults = new Select(numberOfAdults);
    selectAdults.selectByValue(String.valueOf(numberOfAdultPassengers));
-
 
         return new FlightSearchPage(driver);
     }
