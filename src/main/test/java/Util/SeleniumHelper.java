@@ -23,6 +23,11 @@ public class SeleniumHelper {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
+    public static void waitForIsPresentSpecial(By locator, WebDriver driver) {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
 
 
     public static void wairForNotEmptyList(WebDriver driver, By locator) {

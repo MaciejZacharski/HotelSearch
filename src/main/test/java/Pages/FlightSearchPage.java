@@ -127,6 +127,17 @@ public class FlightSearchPage {
 
         return new FlightSearchPage(driver);
     }
+    public FlightSearchPage ConfirmNumberOfPassengers() {
+        confirmButton.click();
+
+        return new FlightSearchPage(driver);
+    }
+    public FlightResultPage clickOnSearchButton() {
+        searchButton.click();
+
+        return new FlightResultPage(driver);
+    }
+
     public FlightSearchPage setNumberOfAdultPassengers(int numberOfAdultPassengers) {
         Select selectAdults = new Select(numberOfAdults);
    selectAdults.selectByValue(String.valueOf(numberOfAdultPassengers));
