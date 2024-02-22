@@ -48,7 +48,7 @@ public class HotelSearchPage {
         searchHotelSpan.click();
         searchHotelInput.sendKeys(cityName);
         String xPath = String.format("//span[@class='select2-match' and text()='%s']", cityName);
-        SeleniumHelper.wairForElementToExist(driver, By.xpath(xPath));
+        SeleniumHelper.waitForIsPresent(By.xpath(xPath), driver);
         driver.findElement(By.xpath(xPath)).click();
         logger.info("Setting city done");
 

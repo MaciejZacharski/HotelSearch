@@ -12,16 +12,18 @@ import java.io.IOException;
 import java.time.Duration;
 
 public class SeleniumHelper {
+    public static void waitForClickable(WebElement element, WebDriver driver) {
 
-    public static void wairForElementToExist(WebDriver driver, By locator) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+
+    }
+    public static void waitForIsPresent(By locator, WebDriver driver) {
+
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-    public static void waitForElementToBeVisible(WebDriver driver , WebElement element) {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        wait.until(ExpectedConditions.visibilityOf(element));
-    }
 
     public static void wairForNotEmptyList(WebDriver driver, By locator) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));

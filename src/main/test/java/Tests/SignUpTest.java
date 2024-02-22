@@ -1,10 +1,10 @@
-package Pages.Tests;
+package Tests;
 
 import Model.User;
 import Pages.LoggedUserPage;
 import Pages.SignUpMainPage;
 import Pages.SignUpPage;
-import Pages.Tests.BaseTest;
+import Tests.BaseTest;
 import Util.SeleniumHelper;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.Status;

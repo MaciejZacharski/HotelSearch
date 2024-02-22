@@ -21,7 +21,7 @@ public class LoggedUserPage {
     }
 
     public String getHeadingText() {
-        SeleniumHelper.waitForElementToBeVisible(driver,userHeading);
+        SeleniumHelper.waitForClickable(userHeading,driver);
         return userHeading.getText();
     }
 

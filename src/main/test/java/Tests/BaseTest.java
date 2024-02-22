@@ -1,4 +1,4 @@
-package Pages.Tests;
+package Tests;
 
 import Util.DriverFactory;
 import com.aventstack.extentreports.ExtentReports;
@@ -33,7 +33,7 @@ public class BaseTest {
 
     @AfterMethod
     public void afterMethod() {
-        driver.quit();
+      //  driver.quit();
     }
 
 

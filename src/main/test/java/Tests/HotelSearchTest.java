@@ -1,4 +1,4 @@
-package Pages.Tests;
+package Tests;
 
 import Pages.HotelSearchPage;
 import Pages.ResultsPage;
